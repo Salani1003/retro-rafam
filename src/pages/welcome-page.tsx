@@ -29,6 +29,7 @@ import {saveDisplayName, getSavedDisplayName} from "@/lib/local-participant";
 import {toUserMessage} from "@/lib/errors";
 import {toast} from "sonner";
 import {useAuth} from "@/hooks/use-auth";
+import {ThemeToggle} from "@/components/theme-toggle";
 import {RetrospectiveList} from "@/components/retrospective/retrospective-list";
 
 const STEPS = [
@@ -148,7 +149,14 @@ export function WelcomePage() {
     <div className="min-h-svh bg-background">
       <div className="mx-auto flex max-w-5xl flex-col gap-14 px-6 py-14 sm:py-20">
         <header className="flex flex-col gap-6">
-          <img src="/logo-rafam.png" alt="RAFAM 2" className="h-10 w-auto self-start" />
+          <div className="flex items-center justify-between">
+            <img
+              src="/logo-rafam.png"
+              alt="RAFAM 2"
+              className="h-10 w-auto dark:brightness-0 dark:invert"
+            />
+            <ThemeToggle />
+          </div>
 
           <div className="max-w-2xl">
             <h1 className="font-[var(--font-display)] text-4xl font-bold tracking-tight text-balance sm:text-5xl">

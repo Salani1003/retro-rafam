@@ -100,6 +100,37 @@
   --radius: 12px;
 }
 
+.dark {
+  --background: #151513;
+  --foreground: #ecebe7;
+  --card: #1e1d1b;
+  --card-foreground: #ecebe7;
+  --popover: #1e1d1b;
+  --popover-foreground: #ecebe7;
+  --primary: #8fc2b1;
+  --primary-foreground: #0f1f1a;
+  --secondary: #2a2926;
+  --secondary-foreground: #e4e2dd;
+  --muted: #262522;
+  --muted-foreground: #a19e97;
+  --accent: #24312d;
+  --accent-foreground: #b7dccf;
+  --destructive: #e07a64;
+  --destructive-foreground: #1a0d09;
+  --border: #33322e;
+  --input: #3a3935;
+  --ring: #8fc2b1;
+
+  --column-good: #7cc493;
+  --column-good-bg: #1d2b21;
+  --column-okay: #d9a94a;
+  --column-okay-bg: #2f2818;
+  --column-fix: #e08a72;
+  --column-fix-bg: #33201b;
+  --column-action: #7fb0e6;
+  --column-action-bg: #1b2633;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

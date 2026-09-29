@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { ConnectionIndicator } from '@/components/retrospective/connection-indicator'
+import { ThemeToggle } from '@/components/theme-toggle'
 import { ParticipantList } from '@/components/retrospective/participant-list'
 import { COLUMN_ICONS } from '@/components/retrospective/column-icons'
 import { RetrospectiveColumn } from '@/components/retrospective/retrospective-column'
@@ -65,7 +66,7 @@ export function RetrospectiveBoard({
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-2.5">
               <Link to="/" aria-label="Volver al inicio" className="shrink-0">
-                <img src="/logo-flecha.png" alt="" className="h-8 w-auto" />
+                <img src="/logo-flecha.png" alt="" className="h-8 w-auto dark:brightness-0 dark:invert" />
               </Link>
               <div className="min-w-0">
                 <h1 className="truncate text-sm font-semibold sm:text-base">
@@ -82,6 +83,7 @@ export function RetrospectiveBoard({
             <div className="flex items-center gap-2">
               <ConnectionIndicator status={connectionStatus} />
               <ParticipantList participants={participants} />
+              <ThemeToggle />
             </div>
           </div>
 

@@ -49,7 +49,7 @@ export function RetrospectiveColumn({
           </p>
         </div>
         <span
-          className="shrink-0 rounded-full bg-white/70 px-1.5 py-0.5 text-xs font-semibold tabular-nums"
+          className="shrink-0 rounded-full bg-white/70 px-1.5 dark:bg-black/30 py-0.5 text-xs font-semibold tabular-nums"
           style={{ color: config.colorVar }}
         >
           {comments.length}

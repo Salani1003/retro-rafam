@@ -82,7 +82,7 @@ export function CommentForm({ columnType, accentColor, onSubmit, onCancel }: Com
             size="sm"
             disabled={isSubmitting}
             style={{ background: accentColor }}
-            className="text-white hover:opacity-90"
+            className="text-white hover:opacity-90 dark:text-background"
           >
             {isSubmitting ? 'Guardando…' : 'Guardar'}
           </Button>
