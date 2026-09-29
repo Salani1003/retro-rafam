@@ -50,7 +50,7 @@ export function CommentForm({ columnType, accentColor, onSubmit, onCancel }: Com
         autoFocus
         placeholder="Escribí tu comentario…"
         maxLength={MAX_LENGTH}
-        className="min-h-20 resize-none border-none bg-transparent p-0 text-sm shadow-none focus-visible:ring-0"
+        className="min-h-20 resize-none border-none bg-transparent px-1 py-1 text-sm shadow-none focus-visible:ring-0"
         {...register('content')}
       />
 
