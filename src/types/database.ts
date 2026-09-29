@@ -101,6 +101,10 @@ export type Database = {
         Args: { p_retrospective_id: string }
         Returns: RetrospectiveRow
       }
+      delete_retrospective: {
+        Args: { p_retrospective_id: string }
+        Returns: undefined
+      }
       toggle_reaction: {
         Args: { p_comment_id: string }
         Returns: boolean

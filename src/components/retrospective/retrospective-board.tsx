@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Copy, Check, Download, MessagesSquare } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Copy, Check, Download, LogOut, MessagesSquare } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
@@ -59,12 +60,14 @@ export function RetrospectiveBoard({
         <div className="mx-auto flex max-w-[1400px] flex-col gap-3 px-4 py-3 sm:px-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-2.5">
-              <div
+              <Link
+                to="/"
+                aria-label="Volver al inicio"
                 className="flex size-8 shrink-0 items-center justify-center rounded-md"
                 style={{ background: 'var(--primary)' }}
               >
                 <MessagesSquare className="size-4" style={{ color: 'var(--primary-foreground)' }} />
-              </div>
+              </Link>
               <div className="min-w-0">
                 <h1 className="truncate text-sm font-semibold sm:text-base">
                   {retrospective.title || 'Retrospectiva de equipo'}
@@ -84,6 +87,12 @@ export function RetrospectiveBoard({
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            <Button asChild variant="ghost" size="sm" className="gap-1.5">
+              <Link to="/">
+                <LogOut className="size-3.5" />
+                Salir
+              </Link>
+            </Button>
             <Button variant="outline" size="sm" onClick={copyInviteLink} className="gap-1.5">
               {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
               {copied ? 'Copiado' : 'Copiar enlace'}

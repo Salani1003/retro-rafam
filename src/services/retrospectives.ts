@@ -58,6 +58,17 @@ export async function getRetrospectiveByCode(roomCode: string): Promise<Retrospe
   return data ? mapRetrospective(data) : null
 }
 
+export async function listRetrospectives(): Promise<Retrospective[]> {
+  const { data, error } = await supabase
+    .from('retrospectives')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(50)
+
+  if (error) throw error
+  return (data ?? []).map(mapRetrospective)
+}
+
 export async function closeRetrospective(retrospectiveId: string): Promise<Retrospective> {
   const { data, error } = await supabase
     .rpc('close_retrospective', { p_retrospective_id: retrospectiveId })
@@ -65,4 +76,12 @@ export async function closeRetrospective(retrospectiveId: string): Promise<Retro
 
   if (error) throw error
   return mapRetrospective(data as RetrospectiveRow)
+}
+
+export async function deleteRetrospective(retrospectiveId: string): Promise<void> {
+  const { error } = await supabase.rpc('delete_retrospective', {
+    p_retrospective_id: retrospectiveId,
+  })
+
+  if (error) throw error
 }

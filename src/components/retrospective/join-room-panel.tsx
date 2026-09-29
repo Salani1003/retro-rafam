@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Link } from 'react-router-dom'
 import { MessagesSquare } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -72,6 +73,9 @@ export function JoinRoomPanel({ roomCode, teamName, title, isClosed, onJoin }: J
           </div>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Uniéndote…' : 'Entrar al tablero'}
+          </Button>
+          <Button asChild variant="ghost">
+            <Link to="/">Volver al inicio</Link>
           </Button>
         </form>
       </Card>

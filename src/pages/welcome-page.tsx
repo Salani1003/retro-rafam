@@ -29,6 +29,7 @@ import {saveDisplayName, getSavedDisplayName} from "@/lib/local-participant";
 import {toUserMessage} from "@/lib/errors";
 import {toast} from "sonner";
 import {useAuth} from "@/hooks/use-auth";
+import {RetrospectiveList} from "@/components/retrospective/retrospective-list";
 
 const STEPS = [
   {
@@ -147,20 +148,7 @@ export function WelcomePage() {
     <div className="min-h-svh bg-background">
       <div className="mx-auto flex max-w-5xl flex-col gap-14 px-6 py-14 sm:py-20">
         <header className="flex flex-col gap-6">
-          <div className="flex items-center gap-2">
-            <div
-              className="flex size-8 items-center justify-center rounded-md"
-              style={{background: "var(--primary)"}}
-            >
-              <MessagesSquare
-                className="size-4"
-                style={{color: "var(--primary-foreground)"}}
-              />
-            </div>
-            <span className="font-[var(--font-display)] text-lg font-semibold">
-              Retro
-            </span>
-          </div>
+          <img src="/logo-rafam.png" alt="RAFAM 2" className="h-10 w-auto self-start" />
 
           <div className="max-w-2xl">
             <h1 className="font-[var(--font-display)] text-4xl font-bold tracking-tight text-balance sm:text-5xl">
@@ -288,6 +276,8 @@ export function WelcomePage() {
             </form>
           </Card>
         </div>
+
+        <RetrospectiveList enabled={isReady && !authError} />
 
         {authError && (
           <p className="text-center text-sm text-destructive">
