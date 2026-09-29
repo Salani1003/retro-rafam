@@ -66,7 +66,8 @@ export function RetrospectiveBoard({
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-2.5">
               <Link to="/" aria-label="Volver al inicio" className="shrink-0">
-                <img src="/logo-flecha.png" alt="" className="h-8 w-auto dark:brightness-0 dark:invert" />
+                <img src="/logo-flecha.png" alt="" className="h-8 w-auto dark:hidden" />
+                <img src="/logo-flecha-dark.png" alt="" className="hidden h-8 w-auto dark:block" />
               </Link>
               <div className="min-w-0">
                 <h1 className="truncate text-sm font-semibold sm:text-base">
