@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Copy, Check, Download, LogOut, MessagesSquare } from 'lucide-react'
+import { Copy, Check, Download, LogOut } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -64,13 +64,8 @@ export function RetrospectiveBoard({
         <div className="mx-auto flex max-w-[1400px] flex-col gap-3 px-4 py-3 sm:px-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-2.5">
-              <Link
-                to="/"
-                aria-label="Volver al inicio"
-                className="flex size-8 shrink-0 items-center justify-center rounded-md"
-                style={{ background: 'var(--primary)' }}
-              >
-                <MessagesSquare className="size-4" style={{ color: 'var(--primary-foreground)' }} />
+              <Link to="/" aria-label="Volver al inicio" className="shrink-0">
+                <img src="/logo-flecha.png" alt="" className="h-8 w-auto" />
               </Link>
               <div className="min-w-0">
                 <h1 className="truncate text-sm font-semibold sm:text-base">
