@@ -24,7 +24,7 @@ export function exportRetrospectiveToPdf(
   const doc = new jsPDF({ unit: 'mm', format: 'a4' })
   const pageWidth = doc.internal.pageSize.getWidth()
 
-  const title = retrospective.title?.trim() || 'Retrospectiva de equipo'
+  const title = retrospective.title?.trim() || 'Retro de equipo'
   const teamName = retrospective.teamName?.trim() || 'Sin equipo asignado'
 
   doc.setFont('helvetica', 'bold')
@@ -41,7 +41,7 @@ export function exportRetrospectiveToPdf(
   doc.text(`Código de sala: ${retrospective.roomCode}`, MARGIN, 34)
   doc.text(`Creada: ${formatFullDate(retrospective.createdAt)}`, MARGIN, 39)
   doc.text(
-    `Finalizada: ${retrospective.closedAt ? formatFullDate(retrospective.closedAt) : 'Retrospectiva en curso'}`,
+    `Finalizada: ${retrospective.closedAt ? formatFullDate(retrospective.closedAt) : 'Retro en curso'}`,
     MARGIN,
     44
   )
@@ -99,7 +99,7 @@ export function exportRetrospectiveToPdf(
     const head =
       columnType === 'action'
         ? [['Comentario', 'Autor', 'Fecha', 'Responsable']]
-        : [['Comentario', 'Autor', 'Fecha', '👍', 'Reaccionaron']]
+        : [['Comentario', 'Autor', 'Fecha', 'Votos', 'Reaccionaron']]
 
     autoTable(doc, {
       startY: cursorY,
@@ -119,12 +119,12 @@ export function exportRetrospectiveToPdf(
       alternateRowStyles: { fillColor: [250, 250, 248] },
       columnStyles:
         columnType === 'action'
-          ? { 0: { cellWidth: 90 }, 1: { cellWidth: 30 }, 2: { cellWidth: 34 }, 3: { cellWidth: 28 } }
+          ? { 0: { cellWidth: 69 }, 1: { cellWidth: 26 }, 2: { cellWidth: 30 }, 3: { cellWidth: 57 } }
           : {
-              0: { cellWidth: 74 },
+              0: { cellWidth: 69 },
               1: { cellWidth: 26 },
               2: { cellWidth: 30 },
-              3: { cellWidth: 10 },
+              3: { cellWidth: 15 },
               4: { cellWidth: 42 },
             },
     })
@@ -135,7 +135,7 @@ export function exportRetrospectiveToPdf(
 
   drawFooter(doc)
 
-  const filename = `retrospectiva-${slugifyForFilename(teamName)}-${slugifyForFilename(
+  const filename = `retro-${slugifyForFilename(teamName)}-${slugifyForFilename(
     new Date().toISOString().slice(0, 10)
   )}.pdf`
   doc.save(filename)

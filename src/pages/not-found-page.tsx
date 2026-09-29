@@ -10,7 +10,7 @@ export function NotFoundPage() {
       </h1>
       <p className="max-w-sm text-sm text-muted-foreground">
         El enlace puede estar mal escrito o ya no existir. Volvé al inicio para crear o unirte a
-        una retrospectiva.
+        una retro.
       </p>
       <Button asChild className="mt-2">
         <Link to="/">Ir al inicio</Link>

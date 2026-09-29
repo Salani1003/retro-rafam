@@ -49,7 +49,7 @@ export function JoinRoomPanel({ roomCode, teamName, title, isClosed, onJoin }: J
             <MessagesSquare className="size-5" style={{ color: 'var(--primary)' }} />
           </div>
           <div>
-            <h1 className="text-lg font-semibold">{title || 'Retrospectiva de equipo'}</h1>
+            <h1 className="text-lg font-semibold">{title || 'Retro de equipo'}</h1>
             {teamName && <p className="text-sm text-muted-foreground">{teamName}</p>}
             <p className="mt-1 font-[var(--font-mono)] text-xs tracking-widest text-muted-foreground">
               {roomCode}
@@ -59,7 +59,7 @@ export function JoinRoomPanel({ roomCode, teamName, title, isClosed, onJoin }: J
 
         {isClosed && (
           <p className="rounded-[var(--radius-sm)] bg-muted px-3 py-2 text-center text-xs text-muted-foreground">
-            Esta retrospectiva ya finalizó. Podés unirte para ver el tablero en modo lectura.
+            Esta retro ya finalizó. Podés unirte para ver el tablero en modo lectura.
           </p>
         )}
 

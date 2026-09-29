@@ -70,7 +70,7 @@ export function RetrospectiveBoard({
               </Link>
               <div className="min-w-0">
                 <h1 className="truncate text-sm font-semibold sm:text-base">
-                  {retrospective.title || 'Retrospectiva de equipo'}
+                  {retrospective.title || 'Retro de equipo'}
                 </h1>
                 <p className="truncate text-xs text-muted-foreground">
                   {retrospective.teamName ?? 'Sin equipo asignado'}
@@ -101,7 +101,7 @@ export function RetrospectiveBoard({
             {retrospective.status === 'closed' ? (
               <Button size="sm" onClick={onExportPdf} className="gap-1.5">
                 <Download className="size-3.5" />
-                Descargar retrospectiva
+                Descargar retro
               </Button>
             ) : (
               <Tooltip>
@@ -109,11 +109,11 @@ export function RetrospectiveBoard({
                   <span>
                     <Button size="sm" disabled className="gap-1.5">
                       <Download className="size-3.5" />
-                      Descargar retrospectiva
+                      Descargar retro
                     </Button>
                   </span>
                 </TooltipTrigger>
-                <TooltipContent>Se habilita cuando finaliza la retrospectiva</TooltipContent>
+                <TooltipContent>Se habilita cuando finaliza la retro</TooltipContent>
               </Tooltip>
             )}
 
@@ -126,7 +126,7 @@ export function RetrospectiveBoard({
 
           {!isActive && (
             <div className="rounded-[var(--radius-sm)] bg-muted px-3 py-2 text-xs text-muted-foreground">
-              Esta retrospectiva finalizó
+              Esta retro finalizó
               {retrospective.closedAt
                 ? ` el ${new Date(retrospective.closedAt).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })}`
                 : ''}

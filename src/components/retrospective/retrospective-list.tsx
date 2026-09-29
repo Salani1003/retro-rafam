@@ -20,9 +20,9 @@ export function RetrospectiveList({ enabled }: { enabled: boolean }) {
     try {
       await deleteRetrospective(id)
       await queryClient.invalidateQueries({ queryKey: ['retrospectives'] })
-      toast.success('Retrospectiva eliminada')
+      toast.success('Retro eliminada')
     } catch (err) {
-      toast.error(toUserMessage(err, 'No pudimos eliminar la retrospectiva.'))
+      toast.error(toUserMessage(err, 'No pudimos eliminar la retro.'))
       throw err
     }
   }
@@ -57,7 +57,7 @@ export function RetrospectiveList({ enabled }: { enabled: boolean }) {
       {data && data.length > 0 && (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {data.map((retro) => {
-            const name = retro.title || 'Retrospectiva de equipo'
+            const name = retro.title || 'Retro de equipo'
             return (
               <div key={retro.id} className="relative">
                 <Link to={`/retro/${retro.roomCode}`} className="block h-full">

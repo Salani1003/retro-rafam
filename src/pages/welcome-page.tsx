@@ -109,13 +109,13 @@ export function WelcomePage() {
     try {
       const retro = await createRetrospective(values);
       saveDisplayName(values.displayName);
-      toast.success("Retrospectiva creada. ¡Compartí el código con tu equipo!");
+      toast.success("Retro creada. ¡Compartí el código con tu equipo!");
       navigate(`/retro/${retro.roomCode}`);
     } catch (err) {
       toast.error(
         toUserMessage(
           err,
-          "No pudimos crear la retrospectiva. Intentá de nuevo.",
+          "No pudimos crear la retro. Intentá de nuevo.",
         ),
       );
     } finally {

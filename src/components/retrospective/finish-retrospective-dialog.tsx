@@ -22,12 +22,12 @@ export function FinishRetrospectiveDialog({ onConfirm }: { onConfirm: () => Prom
       <AlertDialogTrigger asChild>
         <Button variant="outline" size="sm" className="gap-1.5">
           <CheckCircle2 className="size-3.5" />
-          Finalizar retrospectiva
+          Finalizar retro
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>¿Finalizar esta retrospectiva?</AlertDialogTitle>
+          <AlertDialogTitle>¿Finalizar esta retro?</AlertDialogTitle>
           <AlertDialogDescription>
             El equipo va a poder seguir viendo el tablero, pero no se podrán agregar ni votar
             nuevos comentarios. Esta acción no se puede deshacer.

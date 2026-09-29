@@ -65,7 +65,7 @@ export function BoardPage() {
     return (
       <StatusScreen
         title="Algo salió mal"
-        description={toUserMessage(retrospectiveQuery.error, 'No pudimos cargar esta retrospectiva.')}
+        description={toUserMessage(retrospectiveQuery.error, 'No pudimos cargar esta retro.')}
       />
     )
   }
@@ -74,7 +74,7 @@ export function BoardPage() {
     return (
       <StatusScreen
         title="Sala no encontrada"
-        description="No encontramos ninguna retrospectiva con ese código. Revisá el enlace o el código e intentá de nuevo."
+        description="No encontramos ninguna retro con ese código. Revisá el enlace o el código e intentá de nuevo."
       />
     )
   }
@@ -179,9 +179,9 @@ export function BoardPage() {
     try {
       await closeRetrospective(retrospective.id)
       queryClient.invalidateQueries({ queryKey: ['retrospective', code] })
-      toast.success('Retrospectiva finalizada')
+      toast.success('Retro finalizada')
     } catch (err) {
-      toast.error(toUserMessage(err, 'No pudimos finalizar la retrospectiva.'))
+      toast.error(toUserMessage(err, 'No pudimos finalizar la retro.'))
     }
   }
 

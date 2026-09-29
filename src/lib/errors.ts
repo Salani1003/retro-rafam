@@ -1,7 +1,7 @@
 const KNOWN_MESSAGES: Record<string, string> = {
-  SALA_NO_ENCONTRADA: 'No encontramos ninguna retrospectiva con ese código. Revisá el enlace o el código e intentá de nuevo.',
-  RETROSPECTIVA_CERRADA: 'Esta retrospectiva ya finalizó, así que no se pueden agregar cambios.',
-  NO_ES_PARTICIPANTE: 'Necesitás unirte a esta retrospectiva antes de participar.',
+  SALA_NO_ENCONTRADA: 'No encontramos ninguna retro con ese código. Revisá el enlace o el código e intentá de nuevo.',
+  RETROSPECTIVA_CERRADA: 'Esta retro ya finalizó, así que no se pueden agregar cambios.',
+  NO_ES_PARTICIPANTE: 'Necesitás unirte a esta retro antes de participar.',
   COMENTARIO_NO_ENCONTRADO: 'Ese comentario ya no existe. Puede que alguien lo haya eliminado.',
 }
 
@@ -26,7 +26,7 @@ export function toUserMessage(error: unknown, fallback = 'Algo salió mal. Inten
   if (code) return KNOWN_MESSAGES[code]
 
   if (raw.includes('duplicate key') && raw.includes('room_code')) {
-    return 'Ocurrió un problema generando el código de la sala. Intentá crear la retrospectiva de nuevo.'
+    return 'Ocurrió un problema generando el código de la sala. Intentá crear la retro de nuevo.'
   }
   if (raw.includes('Failed to fetch') || raw.includes('NetworkError')) {
     return 'No pudimos conectar con el servidor. Revisá tu conexión a internet.'
