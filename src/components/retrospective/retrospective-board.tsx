@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom'
 import { Copy, Check, Download, LogOut, MessagesSquare } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { ConnectionIndicator } from '@/components/retrospective/connection-indicator'
 import { ParticipantList } from '@/components/retrospective/participant-list'
+import { COLUMN_ICONS } from '@/components/retrospective/column-icons'
 import { RetrospectiveColumn } from '@/components/retrospective/retrospective-column'
 import { FinishRetrospectiveDialog } from '@/components/retrospective/finish-retrospective-dialog'
-import { COLUMN_ORDER } from '@/types/domain'
+import { cn } from '@/lib/utils'
+import { COLUMN_CONFIG, COLUMN_ORDER } from '@/types/domain'
 import type { Comment, ConnectionStatus, Participant, Retrospective } from '@/types/domain'
 import type { ColumnType } from '@/types/database'
 import type { CommentFormInput } from '@/schemas'
@@ -41,6 +44,7 @@ export function RetrospectiveBoard({
   onExportPdf,
 }: RetrospectiveBoardProps) {
   const [copied, setCopied] = useState(false)
+  const [activeColumn, setActiveColumn] = useState<ColumnType>(COLUMN_ORDER[0])
   const isActive = retrospective.status === 'active'
 
   async function copyInviteLink() {
@@ -137,9 +141,38 @@ export function RetrospectiveBoard({
       </header>
 
       <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 py-5 sm:px-6">
-        <div className="flex snap-x snap-mandatory gap-3.5 overflow-x-auto pb-3 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible lg:grid-cols-4 lg:gap-4">
+        <Tabs
+          value={activeColumn}
+          onValueChange={(value) => setActiveColumn(value as ColumnType)}
+          className="mb-3 sm:hidden"
+        >
+          <TabsList className="grid h-auto w-full grid-cols-4">
+            {COLUMN_ORDER.map((columnType) => {
+              const Icon = COLUMN_ICONS[columnType]
+              const config = COLUMN_CONFIG[columnType]
+              return (
+                <TabsTrigger
+                  key={columnType}
+                  value={columnType}
+                  aria-label={config.title}
+                  className="flex-col gap-0.5 py-1.5"
+                >
+                  <Icon className="size-4" style={{ color: config.colorVar }} />
+                  <span className="text-xs font-semibold tabular-nums">
+                    {commentsByColumn[columnType].length}
+                  </span>
+                </TabsTrigger>
+              )
+            })}
+          </TabsList>
+        </Tabs>
+
+        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
           {COLUMN_ORDER.map((columnType) => (
-            <div key={columnType} className="w-[86vw] shrink-0 snap-center sm:w-auto sm:shrink">
+            <div
+              key={columnType}
+              className={cn(columnType === activeColumn ? 'block' : 'hidden', 'sm:block')}
+            >
               <RetrospectiveColumn
                 columnType={columnType}
                 comments={commentsByColumn[columnType]}
