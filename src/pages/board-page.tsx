@@ -38,7 +38,7 @@ export function BoardPage() {
     enabled: Boolean(retrospectiveId && userId),
   })
 
-  const board = useBoard(retrospectiveId, userId)
+  const board = useBoard(retrospectiveId, userId, Boolean(ownParticipantQuery.data))
 
   const retrospective = useMemo(() => {
     if (!retrospectiveQuery.data) return null

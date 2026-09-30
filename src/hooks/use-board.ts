@@ -112,7 +112,7 @@ const initialState: State = {
   isLoaded: false,
 }
 
-export function useBoard(retrospectiveId: string | null, currentUserId: string | null) {
+export function useBoard(retrospectiveId: string | null, currentUserId: string | null, enabled = true) {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [loadError, setLoadError] = useState<string | null>(null)
   const [retrospectivePatch, setRetrospectivePatch] = useState<Retrospective | null>(null)
@@ -121,7 +121,7 @@ export function useBoard(retrospectiveId: string | null, currentUserId: string |
   const connectionStatus = useConnectionStatus(channel)
 
   useEffect(() => {
-    if (!retrospectiveId) return
+    if (!retrospectiveId || !enabled) return
     let cancelled = false
 
     fetchBoardData(retrospectiveId)
@@ -137,10 +137,11 @@ export function useBoard(retrospectiveId: string | null, currentUserId: string |
     return () => {
       cancelled = true
     }
-  }, [retrospectiveId])
+  }, [retrospectiveId, enabled])
 
   useEffect(() => {
-    if (!retrospectiveId) return
+    if (!retrospectiveId || !enabled) return
+    let cancelled = false
 
     const ch = supabase
       .channel(`retro-${retrospectiveId}`)
@@ -182,17 +183,26 @@ export function useBoard(retrospectiveId: string | null, currentUserId: string |
           setRetrospectivePatch(mapRetrospective(payload.new as RetrospectiveRow))
         }
       )
-      .subscribe()
+      .subscribe((status) => {
+        if (status !== 'SUBSCRIBED') return
+        // Re-sincroniza al (re)conectar: cubre cambios ocurridos antes de la suscripción.
+        fetchBoardData(retrospectiveId)
+          .then((data) => {
+            if (!cancelled) dispatch({ type: 'INITIAL_LOAD', ...data })
+          })
+          .catch(() => {})
+      })
 
     channelRef.current = ch
     setChannel(ch)
 
     return () => {
+      cancelled = true
       supabase.removeChannel(ch)
       channelRef.current = null
       setChannel(null)
     }
-  }, [retrospectiveId])
+  }, [retrospectiveId, enabled])
 
   const currentParticipant = useMemo<Participant | null>(() => {
     if (!currentUserId) return null
