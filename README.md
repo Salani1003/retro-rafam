@@ -23,6 +23,8 @@ jspdf-autotable.
      nada (por diseño).
    - `0004_realtime.sql` — agrega las tablas a la publicación `supabase_realtime` para que los
      cambios se propaguen a todos los participantes conectados.
+   - `0005_delete_retrospective.sql` — función RPC `delete_retrospective` para eliminar una sala
+     y todo su contenido (en cascada).
 
    Si preferís usar la CLI de Supabase (`supabase db push` con estas migraciones en
    `supabase/migrations/`), también funciona: el orden numérico ya es el correcto.
@@ -57,6 +59,26 @@ npm run dev
 Abrí `http://localhost:5173`. Para probar la colaboración en tiempo real, abrí la misma sala en
 dos pestañas (o una en modo incógnito) con nombres distintos.
 
+## Mantener activo el proyecto de Supabase (plan free)
+
+El plan gratuito de Supabase pausa el proyecto tras 7 días sin actividad en la base de datos. Como
+la app se usa poco (aprox. una vez por mes), el repo incluye
+`.github/workflows/keep-alive.yml`: un workflow programado (lunes y jueves, 12:00 UTC) que hace
+un `GET` a `/rest/v1/retrospectives?select=id&limit=1` con la anon key.
+
+Para que funcione, cargá estos secrets en **Settings → Secrets and variables → Actions** del
+repo, con los mismos valores del `.env`:
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+
+También se puede lanzar a mano desde la pestaña **Actions → Supabase keep-alive → Run workflow**.
+
+> **Limitación:** en repos públicos GitHub desactiva los workflows programados tras 60 días sin
+> actividad en el repo (commits, PRs, issues). Si eso pasa, reactivalo desde la pestaña Actions o
+> usá un servicio externo como [cron-job.org](https://cron-job.org) que haga el mismo `GET` con
+> los headers `apikey` y `Authorization: Bearer <anon key>` (pendiente de configurar).
+
 ## Scripts
 
 - `npm run dev` — servidor de desarrollo.
@@ -89,4 +111,7 @@ src/
 
 supabase/
 └── migrations/           # Esquema, funciones RPC, RLS y Realtime, versionados
+
+.github/
+└── workflows/            # keep-alive.yml: ping periódico a Supabase
 ```
